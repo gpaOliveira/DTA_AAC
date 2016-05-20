@@ -34,41 +34,6 @@
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:src="@drawable/x"/>
-            <ImageButton
-                android:id="@+id/category_1"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                android:src="@drawable/bandera"/>
-            <ImageButton
-                android:id="@+id/category_2"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                android:src="@drawable/barco_1"/>
-            <ImageButton
-                android:id="@+id/category_3"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                android:src="@drawable/banar"/>
-            <ImageButton
-                android:id="@+id/category_4"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                android:src="@drawable/ic_launcher"/>
-            <ImageButton
-                android:id="@+id/category_5"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                android:src="@drawable/banos_2"/>
         </LinearLayout>
     </HorizontalScrollView>
 
@@ -78,8 +43,10 @@
         android:layout_height="0dp"
         android:layout_weight="60">
         <RelativeLayout
+            android:id="@+id/data"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
+
             <LinearLayout
                 android:id="@+id/col_0"
                 android:layout_width="wrap_content"
@@ -130,64 +97,6 @@
                     android:src="@drawable/x"/>
                 <ImageButton
                     android:id="@+id/row_1_2"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/x"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/col_2"
-                android:layout_toRightOf="@+id/col_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <ImageButton
-                    android:id="@+id/row_2_0"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/x"/>
-                <ImageButton
-                    android:id="@+id/row_2_1"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/x"/>
-                <ImageButton
-                    android:id="@+id/row_2_2"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/x"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/col_3"
-                android:layout_toRightOf="@+id/col_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <ImageButton
-                    android:id="@+id/row_3_0"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/x"/>
-                <ImageButton
-                    android:id="@+id/row_3_1"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/x"/>
-                <ImageButton
-                    android:id="@+id/row_3_2"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:scaleType="fitCenter"
