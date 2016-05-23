@@ -1,106 +1,210 @@
 package dta.aac;
 
-import android.support.v7.app.ActionBar;
+import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.LinearLayout;
-import android.view.ViewGroup;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.util.TypedValue;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Collections;
+import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
+import dta.aac.Acao;
+import dta.aac.Categoria;
 
 public class MainActivity extends AppCompatActivity {
 
-    static final Map<String, Integer> IMAGES_FROM_STR = Collections.unmodifiableMap(new HashMap<String, Integer>() {
-        {
-            put("x", R.drawable.x);
-            put("bandera", R.drawable.bandera);
-            put("barco_1", R.drawable.barco_1);
-            put("banar", R.drawable.banar);
-            put("ic_Launcher", R.drawable.ic_launcher);
-            put("banos_2", R.drawable.banos_2);
-        }
-    });
+    ArrayList<Categoria> categorias = new ArrayList<Categoria>();
+    TableRow tblCategorias;
+    TableLayout tblAcoes;
+    TextView tvAcao;
+    Button btnShare;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        populateCategories();
-        populateDataWithCategory("x");//just default one...shall we remove it ?
+        tblCategorias = (TableRow) findViewById(R.id.tblCategorias);
+        tblAcoes = (TableLayout) findViewById(R.id.tblAcoes);
+        tvAcao = (TextView) findViewById(R.id.txtBuffer);
+        btnShare = (Button) findViewById(R.id.btn_share);
+        InicializaCategorias();
+        RenderizaCategorias();
+        btnShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                String shareBody = tvAcao.getText().toString();
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                startActivity(Intent.createChooser(sharingIntent, "Share via"));
+            }
+        });
     }
 
-    protected void populateCategories(){
-        //yeah, someday we WILL read it from somewhere else, someday
-        String[] images = new String[]{"x", "bandera", "barco_1", "banar", "ic_Launcher","banos_2"};
+    private void InicializaCategorias() {
+        //AQUI PODE LER DE UM XML, DE UM JSON OU ATÉ DE UM WS...
+        Categoria cat = MontaCategoria("Comer");
+        cat.setAcoes(ObterAcoesComida());
+        categorias.add(cat);
 
-        LinearLayout categories = (LinearLayout)findViewById(R.id.categories);
-        categories.removeAllViews();
+        cat = MontaCategoria("Dor");
+        cat.setAcoes(ObterAcoesCorpo());
+        categorias.add(cat);
 
-        for (String image : images) {
-            ImageButton button = createDataButton(image);
-            button.setOnClickListener(new View.OnClickListener() {
+        cat = MontaCategoria("Coceira");
+        cat.setAcoes(ObterAcoesCorpo());
+        categorias.add(cat);
+
+        cat = MontaCategoria("Estudo");
+        cat.setAcoes(ObterAcoesCorpo());
+        categorias.add(cat);
+
+        cat = MontaCategoria("Líquido");
+        cat.setAcoes(ObterAcoesComida());
+        categorias.add(cat);
+
+    }
+
+    private ArrayList<Acao> ObterAcoesComida() {
+        ArrayList<Acao> acoes = new ArrayList<Acao>();
+        acoes.add(MontaAcao(R.drawable.aperitivo, "Queijo"));
+        acoes.add(MontaAcao(R.drawable.aperitivo, "Queijo2"));
+        acoes.add(MontaAcao(R.drawable.aperitivo, "Queijo3"));
+        acoes.add(MontaAcao(R.drawable.aperitivo, "Teste"));
+        acoes.add(MontaAcao(R.drawable.aperitivo, "Teste2"));
+        acoes.add(MontaAcao(R.drawable.aperitivo, "Teste3"));
+        acoes.add(MontaAcao(R.drawable.aperitivo, "Teste"));
+        acoes.add(MontaAcao(R.drawable.aperitivo_1, "Teste2"));
+        acoes.add(MontaAcao(R.drawable.aperitivo_1, "Teste3"));
+        acoes.add(MontaAcao(R.drawable.aperitivo_1, "Teste"));
+        acoes.add(MontaAcao(R.drawable.aperitivo_1, "Teste2"));
+        acoes.add(MontaAcao(R.drawable.aperitivo_1, "Teste3"));
+        acoes.add(MontaAcao(R.drawable.aperitivo_1, "Teste"));
+        acoes.add(MontaAcao(R.drawable.aperitivo_1, "Teste2"));
+        acoes.add(MontaAcao(R.drawable.aperitivo_1, "Teste3"));
+        return acoes;
+    }
+
+    private ArrayList<Acao> ObterAcoesCorpo() {
+        ArrayList<Acao> acoes = new ArrayList<Acao>();
+        acoes.add(MontaAcao(R.drawable.aperitivo_1, "Teste2"));
+        acoes.add(MontaAcao(R.drawable.aperitivo_1, "Teste3"));
+        acoes.add(MontaAcao(R.drawable.aperitivo_1, "Teste"));
+        acoes.add(MontaAcao(R.drawable.aperitivo_1, "Teste2"));
+        acoes.add(MontaAcao(R.drawable.aperitivo_1, "Teste3"));
+        acoes.add(MontaAcao(R.drawable.aperitivo_1, "Teste"));
+        acoes.add(MontaAcao(R.drawable.aperitivo_1, "Teste2"));
+        acoes.add(MontaAcao(R.drawable.aperitivo_1, "Teste3"));
+        acoes.add(MontaAcao(R.drawable.aperitivo, "Queijo"));
+        acoes.add(MontaAcao(R.drawable.aperitivo, "Queijo2"));
+        acoes.add(MontaAcao(R.drawable.aperitivo, "Queijo3"));
+        acoes.add(MontaAcao(R.drawable.aperitivo, "Teste"));
+        acoes.add(MontaAcao(R.drawable.aperitivo, "Teste2"));
+        acoes.add(MontaAcao(R.drawable.aperitivo, "Teste3"));
+        acoes.add(MontaAcao(R.drawable.aperitivo, "Teste"));
+        acoes.add(MontaAcao(R.drawable.aperitivo, "Queijo"));
+        acoes.add(MontaAcao(R.drawable.aperitivo, "Queijo2"));
+        acoes.add(MontaAcao(R.drawable.aperitivo, "Queijo3"));
+        acoes.add(MontaAcao(R.drawable.aperitivo, "Teste"));
+        acoes.add(MontaAcao(R.drawable.aperitivo, "Teste2"));
+        acoes.add(MontaAcao(R.drawable.aperitivo, "Teste3"));
+        acoes.add(MontaAcao(R.drawable.aperitivo, "Teste"));
+        acoes.add(MontaAcao(R.drawable.aperitivo_1, "Teste2"));
+        acoes.add(MontaAcao(R.drawable.aperitivo_1, "Teste3"));
+        acoes.add(MontaAcao(R.drawable.aperitivo_1, "Teste"));
+        acoes.add(MontaAcao(R.drawable.aperitivo_1, "Teste2"));
+        acoes.add(MontaAcao(R.drawable.aperitivo_1, "Teste3"));
+        acoes.add(MontaAcao(R.drawable.aperitivo_1, "Teste"));
+        acoes.add(MontaAcao(R.drawable.aperitivo_1, "Teste2"));
+        return acoes;
+    }
+
+
+    private Acao MontaAcao(int imagem, String descricao) {
+        Acao ac = new Acao(imagem, descricao);
+        return ac;
+    }
+
+    private Categoria MontaCategoria(String nome) {
+        Categoria cat = new Categoria();
+        cat.setNome(nome);
+        return cat;
+    }
+
+    private void RenderizaAcoes(ArrayList<Acao> acoes) {
+        int i = 0;
+        tblAcoes.removeAllViews();
+        TableRow tr = null;
+        for (Acao a : acoes) {
+            if (i % 3 == 0) {
+                if (i != 0) {
+                    tblAcoes.addView(tr);
+                }
+                tr = new TableRow(this);
+                tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+            }
+
+
+            RelativeLayout rl = (RelativeLayout) LayoutInflater.from(this).inflate(R.layout.acoes_row, null);
+
+            ImageView b = (ImageView) rl.findViewById(R.id.img_row);
+
+            TextView tv = (TextView) rl.findViewById(R.id.txt_row);
+            tv.setText(a.getNome());
+
+            b.setTag(a);
+            b.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ImageButton button = (ImageButton) v;
-                    populateDataWithCategory((String)button.getTag());
+                    Acao acao = (Acao) v.getTag();
+                    tvAcao.setText(tvAcao.getText() + " " + acao.getNome());
                 }
             });
-            categories.addView(button);
+            tr.addView(rl);
+            i++;
+        }
+        tblAcoes.addView(tr);
+    }
+
+    private void RenderizaCategorias() {
+        for (int i = 0; i < categorias.size(); i++) {
+            Button bt = new Button(this);
+            TableRow.LayoutParams params = new TableRow.LayoutParams(400, 200);
+            params.setMargins(20, 20, 20, 20);
+            bt.setLayoutParams(params);
+            bt.setText(categorias.get(i).getNome());
+            bt.setTag(categorias.get(i));
+            bt.setGravity(Gravity.CENTER);
+            bt.setPadding(20, 20, 20, 20);
+            bt.setBackgroundColor(Color.DKGRAY);
+            bt.setTextColor(Color.WHITE);
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Categoria c = (Categoria) v.getTag();
+                    RenderizaAcoes(c.getAcoes());
+                }
+            });
+            tblCategorias.addView(bt);
         }
     }
 
-    protected void populateDataWithCategory(String categoryImage){
-        RelativeLayout data = (RelativeLayout)findViewById(R.id.data);
-        data.removeAllViews();
 
-        int numberOfColumns = 4;//may it be received as a parameter someday or we will read it from somewhere else?
-        int numberOfButtonsPerColumn = 3;//may it be received as a parameter someday or we will read it from somewhere else?
-        for (int c = 0; c < numberOfColumns; c++){
-            LinearLayout linearLayout = this.createColumn();
-            for (int b = 0; b < numberOfButtonsPerColumn; b++){
-                ImageButton button = createDataButton(categoryImage);//in the future, we may want to read it from somewhere else
-                linearLayout.addView(button);
-            }
-            appendToRelativeLayout(data, linearLayout);
-        }
-    }
-
-    protected void appendToRelativeLayout(RelativeLayout data, LinearLayout layout){
-        if (data.getChildCount() > 0){
-            int lastCreatedLinearLayoutId = data.getChildAt(data.getChildCount() - 1).getId();
-            ((RelativeLayout.LayoutParams)layout.getLayoutParams()).addRule(RelativeLayout.RIGHT_OF, lastCreatedLinearLayoutId );
-        }
-        data.addView(layout);
-    }
-
-    protected LinearLayout createColumn(){
-        LinearLayout linearLayout = new LinearLayout(this);
-        linearLayout.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        linearLayout.setOrientation(LinearLayout.VERTICAL);
-        linearLayout.setId(View.generateViewId());
-        return linearLayout;
-    }
-
-    protected ImageButton createDataButton(String categoryImage){
-        ImageButton button = new ImageButton(this);
-        button.setLayoutParams(new RelativeLayout.LayoutParams(getDPI(100), getDPI(100)));
-        button.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        button.setAdjustViewBounds(true);
-        button.setImageResource(IMAGES_FROM_STR.get(categoryImage));
-        button.setTag(categoryImage);
-        button.setId(View.generateViewId());
-        return button;
-    }
-
-    protected int getDPI(int n){
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, n, getResources().getDisplayMetrics());
-    }
 }
