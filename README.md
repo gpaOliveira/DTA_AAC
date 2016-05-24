@@ -11,7 +11,7 @@ For all Views, the user should be able to:
 
 ## Left Right View
 
-![Alt text](/screenshots/left.right.png?raw=true "Left Right View")
+![Alt text](/screenshots/left.right.png?raw=true "Left Right View"){:height="250px" width="250px"}.
 
 For this View only, the user should be able to:
 
@@ -20,7 +20,7 @@ For this View only, the user should be able to:
 
 ## Up Down View
 
-![Alt text](/screenshots/up.down.png?raw=true "Up Down View")
+![Alt text](/screenshots/up.down.png?raw=true "Up Down View"){:height="250px" width="250px"}.
 
 For this View only, the user should be able to:
 
