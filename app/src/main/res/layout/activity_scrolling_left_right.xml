@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="dta.aac.ScrollingLeftRightActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/txtBuffer"
+            android:layout_width="250dp"
+            android:layout_height="80dp"
+            android:hint="Escolha o que vc quer clicando ali embaixo" />
+
+        <ImageButton
+            android:id="@+id/btn_share"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_centerVertical="true"
+            android:layout_margin="4dp"
+            android:layout_toRightOf="@+id/txtBuffer"
+            android:background="#dcdcdc"
+            android:gravity="center"
+            android:padding="20dip"
+            android:text="Compartilhar"
+            android:onClick="onShareClick"
+            android:src="@android:drawable/ic_menu_share"
+            android:textColor="#000000" />
+    </RelativeLayout>
+
+    <HorizontalScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:background="#FFFFFF">
+        <LinearLayout
+            android:id="@+id/tblCategorias"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- http://stackoverflow.com/questions/15116393/fit-image-in-imagebutton-in-android -->
+            <ImageButton
+                android:id="@+id/category_0"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:src="@drawable/x"/>
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!-- http://androidexample.com/Relative_Layout_Basics_-_Android_Example/index.php?view=article_discription&aid=73&aaid=97 -->
+    <HorizontalScrollView
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="200dp"
+        android:fillViewport="true"
+        android:scrollbarStyle="outsideInset">
+        <RelativeLayout
+            android:id="@+id/tblAcoes"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+        <!--
+            <LinearLayout
+                android:id="@+id/col_0"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+                <ImageButton
+                    android:id="@+id/row_0_0"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/x"/>
+                <ImageButton
+                    android:id="@+id/row_0_1"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/x"/>
+                <ImageButton
+                    android:id="@+id/row_0_2"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/x"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/col_1"
+                android:layout_toRightOf="@+id/col_0"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+                <ImageButton
+                    android:id="@+id/row_1_0"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/x"/>
+                <ImageButton
+                    android:id="@+id/row_1_1"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/x"/>
+                <ImageButton
+                    android:id="@+id/row_1_2"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/x"/>
+            </LinearLayout>
+        -->
+        </RelativeLayout>
+    </HorizontalScrollView>
+
+</RelativeLayout>
