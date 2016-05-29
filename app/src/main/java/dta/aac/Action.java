@@ -22,7 +22,9 @@ public class Action {
 
     public RelativeLayout render(final AacActivity activityContext) throws NullPointerException{
         RelativeLayout rl = (RelativeLayout) LayoutInflater.from(activityContext).inflate(R.layout.action_vertical_row, null);
+        rl.setFocusable(false);
         ImageView ivRow = (ImageView) rl.findViewById(R.id.img_row);
+        ivRow.setContentDescription(this.name);
         TextView tvRow = (TextView) rl.findViewById(R.id.txt_row);
         tvRow.setText(this.name);
         ivRow.setTag(this);
@@ -43,6 +45,7 @@ public class Action {
         button.setAdjustViewBounds(true);
         button.setImageResource(categoryImageHash);
         button.setTag(this);
+        button.setContentDescription(this.name);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

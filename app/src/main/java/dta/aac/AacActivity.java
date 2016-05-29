@@ -2,6 +2,7 @@ package dta.aac;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
@@ -9,17 +10,20 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public abstract class AacActivity  extends AppCompatActivity {
+public abstract class AacActivity  extends AppCompatActivity implements
+        TextToSpeech.OnInitListener {
 
     //Stop complaining about NullPointers !
     ImageButton btnShare = null;
     TextView tvAction = null;
     View categoriesView = null;
     View actionsView = null;
+    private TextToSpeech tts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        tts = new TextToSpeech(this, this);
         setContentView(this.getLayoutResourceId());
         getSupportActionBar().setTitle(this.getLayoutTitleText());
         btnShare = (ImageButton) findViewById(R.id.btn_share);
@@ -45,7 +49,12 @@ public abstract class AacActivity  extends AppCompatActivity {
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
         startActivity(Intent.createChooser(sharingIntent, "Share via"));
     }
+    public void onListenClick(View v){
+        String text = tvAction.getText().toString();
 
+        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+
+    }
     protected abstract int getLayoutResourceId();
     protected abstract String getLayoutTitleText();
     protected abstract void renderCategories();

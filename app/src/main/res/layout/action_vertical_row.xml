@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/img_row"
         android:text="Comida"
+        android:importantForAccessibility="no"
         android:textAlignment="center" />
 
 </RelativeLayout>

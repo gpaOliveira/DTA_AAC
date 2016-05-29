@@ -61,4 +61,9 @@ public class ScrollingLeftRightActivity extends AacActivity{
         linearLayout.setId(View.generateViewId());
         return linearLayout;
     }
+
+    @Override
+    public void onInit(int status) {
+
+    }
 }

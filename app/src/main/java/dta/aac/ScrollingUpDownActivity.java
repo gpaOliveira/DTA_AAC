@@ -51,4 +51,9 @@ public class ScrollingUpDownActivity extends AacActivity {
         }
         return tr;
     }
+
+    @Override
+    public void onInit(int status) {
+
+    }
 }
