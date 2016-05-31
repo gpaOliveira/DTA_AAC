@@ -43,27 +43,22 @@ public class ScrollingLeftRightActivity extends AacActivity{
     }
 
     private LinearLayout useOrReuseLinearLayout(RelativeLayout data, LinearLayout ll, int i){
-        int numberOfButtonsPerColumn = 4;//may it be received as a parameter someday or we will read it from somewhere else?
+        int numberOfButtonsPerColumn = 2;//may it be received as a parameter someday or we will read it from somewhere else?
+        LinearLayout myll = ll;
         if (i % numberOfButtonsPerColumn == 0) {
-            if (i != 0) {
+
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            if (ll != null) {
                 data.addView(ll);
+                params.addRule(RelativeLayout.RIGHT_OF, ll.getId());
+                params.addRule(RelativeLayout.END_OF, ll.getId());
             }
-            ll = new LinearLayout(this);
-            ll.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            ll.setOrientation(LinearLayout.VERTICAL);
+
+            myll = new LinearLayout(this);
+            myll.setOrientation(LinearLayout.VERTICAL);
+            myll.setLayoutParams(params);
         }
-        return ll;
+        return myll;
     }
 
-    protected LinearLayout createColumn(){
-        LinearLayout linearLayout = new LinearLayout(this);
-
-        linearLayout.setId(View.generateViewId());
-        return linearLayout;
-    }
-
-    @Override
-    public void onInit(int status) {
-
-    }
 }

@@ -46,7 +46,7 @@
             android:contentDescription="Escutar"
             android:text="Compartilhar"
             android:onClick="onListenClick"
-            android:src="@android:drawable/ic_menu_share"
+            android:src="@android:drawable/ic_btn_speak_now"
             android:textColor="#000000" />
     </RelativeLayout>
 

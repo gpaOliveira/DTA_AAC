@@ -43,7 +43,7 @@ public class Action {
         button.setLayoutParams(new RelativeLayout.LayoutParams(Data.getDPI(100, activityContext), Data.getDPI(100, activityContext)));
         button.setScaleType(ImageView.ScaleType.FIT_CENTER);
         button.setAdjustViewBounds(true);
-        button.setImageResource(categoryImageHash);
+        button.setImageResource(this.imageHash);
         button.setTag(this);
         button.setContentDescription(this.name);
         button.setOnClickListener(new View.OnClickListener() {

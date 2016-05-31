@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public abstract class AacActivity  extends AppCompatActivity implements
         TextToSpeech.OnInitListener {
@@ -18,19 +19,43 @@ public abstract class AacActivity  extends AppCompatActivity implements
     TextView tvAction = null;
     View categoriesView = null;
     View actionsView = null;
-    private TextToSpeech tts;
+    TextToSpeech tts;
+    int MY_DATA_CHECK_CODE = 0x1204;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        tts = new TextToSpeech(this, this);
         setContentView(this.getLayoutResourceId());
         getSupportActionBar().setTitle(this.getLayoutTitleText());
         btnShare = (ImageButton) findViewById(R.id.btn_share);
         tvAction = (TextView) findViewById(R.id.txtBuffer);
         categoriesView = findViewById(R.id.tblCategorias);
         actionsView = findViewById(R.id.tblAcoes);
+
+        //tts control
+        Intent checkIntent = new Intent();
+        checkIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
+        startActivityForResult(checkIntent, MY_DATA_CHECK_CODE);
+
+        //populate categories and load the actions of the first one
         this.renderCategories();
+        Category c = Data.getInstance().getCategories().get(0);
+        renderActions(c, c.getActions());
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == MY_DATA_CHECK_CODE) {
+            if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
+                // success, create the TTS instance
+                tts = new TextToSpeech(this, this);
+                tts.setLanguage(Locale.US);
+            } else {
+                // missing data, install it
+                Intent installIntent = new Intent();
+                installIntent.setAction(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
+                startActivity(installIntent);
+            }
+        }
     }
 
     public void onActionClick(Action a, View v){
@@ -51,10 +76,23 @@ public abstract class AacActivity  extends AppCompatActivity implements
     }
     public void onListenClick(View v){
         String text = tvAction.getText().toString();
+        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null);
+    }
 
-        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+    @Override
+    protected void onDestroy() {
+        if (tts!=null) {
+            tts.stop();
+            tts.shutdown();
+        }
+        super.onDestroy();
+    }
+
+    @Override
+    public void onInit(int speechStatus) {
 
     }
+
     protected abstract int getLayoutResourceId();
     protected abstract String getLayoutTitleText();
     protected abstract void renderCategories();
