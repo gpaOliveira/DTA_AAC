@@ -21,6 +21,8 @@ public abstract class AacActivity  extends AppCompatActivity implements
     View actionsView = null;
     TextToSpeech tts;
     int MY_DATA_CHECK_CODE = 0x1204;
+    int NUMBER_OF_BUTTONS_PER_COLUMN = 3;
+    Data data = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,7 @@ public abstract class AacActivity  extends AppCompatActivity implements
         tvAction = (TextView) findViewById(R.id.txtBuffer);
         categoriesView = findViewById(R.id.tblCategorias);
         actionsView = findViewById(R.id.tblAcoes);
+        data = new Data(this);
 
         //tts control
         Intent checkIntent = new Intent();
@@ -39,8 +42,8 @@ public abstract class AacActivity  extends AppCompatActivity implements
 
         //populate categories and load the actions of the first one
         this.renderCategories();
-        Category c = Data.getInstance().getCategories().get(0);
-        renderActions(c, c.getActions());
+        Category c = data.getCategories().get(0);
+        renderActions(c, c.getActions(), NUMBER_OF_BUTTONS_PER_COLUMN);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -62,8 +65,12 @@ public abstract class AacActivity  extends AppCompatActivity implements
         tvAction.setText(tvAction.getText() + " " + a.getName());
     }
 
+    public void onClearClick(View v) {
+        tvAction.setText("");
+    }
+
     public void onCategoryClick(Category c, View v){
-        renderActions(c, c.getActions());
+        renderActions(c, c.getActions(), NUMBER_OF_BUTTONS_PER_COLUMN);
     }
 
     public void onShareClick(View v){
@@ -96,5 +103,5 @@ public abstract class AacActivity  extends AppCompatActivity implements
     protected abstract int getLayoutResourceId();
     protected abstract String getLayoutTitleText();
     protected abstract void renderCategories();
-    protected abstract void renderActions(Category c, ArrayList<Action> actions);
+    protected abstract void renderActions(Category c, ArrayList<Action> actions, int numberOfButtonsPerColumn);
 }

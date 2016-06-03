@@ -30,6 +30,10 @@ public class Category {
         return imageHash;
     }
 
+    public String getName(){
+        return name;
+    }
+
     public Button renderButton(final AacActivity activityContext){
         Button bt = new Button(activityContext);
         TableRow.LayoutParams params = new TableRow.LayoutParams(400, 200);

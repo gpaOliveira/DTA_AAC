@@ -13,7 +13,7 @@
 
         <TextView
             android:id="@+id/txtBuffer"
-            android:layout_width="250dp"
+            android:layout_width="200dp"
             android:layout_height="80dp"
             android:hint="Escolha o que vc quer clicando ali embaixo" />
 
@@ -46,6 +46,22 @@
             android:text="Compartilhar"
             android:onClick="onListenClick"
             android:src="@android:drawable/ic_btn_speak_now"
+            android:textColor="#000000" />
+
+        <ImageButton
+            android:id="@+id/btn_clear"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_margin="4dp"
+            android:layout_toRightOf="@+id/btn_listen"
+            android:background="#dcdcdc"
+            android:gravity="center"
+            android:padding="20dip"
+            android:contentDescription="Escutar"
+            android:text="Compartilhar"
+            android:onClick="onClearClick"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
             android:textColor="#000000" />
     </RelativeLayout>
 
@@ -89,56 +105,76 @@
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:orientation="vertical">
-                <ImageButton
-                    android:id="@+id/row_0_0"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/x"/>
-                <ImageButton
-                    android:id="@+id/row_0_1"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/x"/>
-                <ImageButton
-                    android:id="@+id/row_0_2"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/x"/>
             </LinearLayout>
-
             <LinearLayout
                 android:id="@+id/col_1"
                 android:layout_toRightOf="@+id/col_0"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:orientation="vertical">
-                <ImageButton
-                    android:id="@+id/row_1_0"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/x"/>
-                <ImageButton
-                    android:id="@+id/row_1_1"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/x"/>
-                <ImageButton
-                    android:id="@+id/row_1_2"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/x"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/col_2"
+                android:layout_toRightOf="@+id/col_1"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/col_3"
+                android:layout_toRightOf="@+id/col_2"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/col_4"
+                android:layout_toRightOf="@+id/col_3"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/col_5"
+                android:layout_toRightOf="@+id/col_4"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/col_6"
+                android:layout_toRightOf="@+id/col_5"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/col_7"
+                android:layout_toRightOf="@+id/col_6"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/col_8"
+                android:layout_toRightOf="@+id/col_7"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/col_9"
+                android:layout_toRightOf="@+id/col_8"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/col_10"
+                android:layout_toRightOf="@+id/col_9"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
             </LinearLayout>
         </RelativeLayout>
     </HorizontalScrollView>

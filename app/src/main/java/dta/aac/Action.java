@@ -23,12 +23,13 @@ public class Action {
     public RelativeLayout render(final AacActivity activityContext) throws NullPointerException{
         RelativeLayout rl = (RelativeLayout) LayoutInflater.from(activityContext).inflate(R.layout.action_vertical_row, null);
         rl.setFocusable(false);
-        ImageView ivRow = (ImageView) rl.findViewById(R.id.img_row);
-        ivRow.setContentDescription(this.name);
+        ImageView image = (ImageView) rl.findViewById(R.id.img_row);
+        image.setImageResource(this.imageHash);
+        image.setContentDescription(this.name);
         TextView tvRow = (TextView) rl.findViewById(R.id.txt_row);
         tvRow.setText(this.name);
-        ivRow.setTag(this);
-        ivRow.setOnClickListener(new View.OnClickListener() {
+        image.setTag(this);
+        image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Action action = (Action) v.getTag();
@@ -38,22 +39,23 @@ public class Action {
         return rl;
     }
 
-    public ImageButton renderImageButton(final AacActivity activityContext, int categoryImageHash) {
-        ImageButton button = new ImageButton(activityContext);
-        button.setLayoutParams(new RelativeLayout.LayoutParams(Data.getDPI(100, activityContext), Data.getDPI(100, activityContext)));
-        button.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        button.setAdjustViewBounds(true);
-        button.setImageResource(this.imageHash);
-        button.setTag(this);
-        button.setContentDescription(this.name);
-        button.setOnClickListener(new View.OnClickListener() {
+    public ImageButton renderImageButton(final AacActivity activityContext) {
+        ImageButton imButton = new ImageButton(activityContext);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(Data.getDPI(100, activityContext), Data.getDPI(100, activityContext));
+        imButton.setLayoutParams(params);
+        imButton.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        imButton.setAdjustViewBounds(true);
+        imButton.setImageResource(this.imageHash);
+        imButton.setTag(this);
+        imButton.setContentDescription(this.name);
+        imButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Action action = (Action) v.getTag();
                 activityContext.onActionClick(action, v);
             }
         });
-        return button;
+        return imButton;
     }
 
 }

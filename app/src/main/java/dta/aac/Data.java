@@ -1,5 +1,6 @@
 package dta.aac;
 
+import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
 
 import java.util.ArrayList;
@@ -8,10 +9,11 @@ import java.util.ArrayList;
  * Created by oliveiga on 5/23/2016.
  */
 public class Data {
-    private static final Data INSTANCE = new Data();
     ArrayList<Category> categories = new ArrayList<Category>();
+    AacActivity activityContext = null;
 
-    private Data(){
+    public Data(final AacActivity activityContext){
+        this.activityContext = activityContext;
         InicializaCategorias();
     }
 
@@ -20,73 +22,114 @@ public class Data {
     }
 
     private void InicializaCategorias() {
-        //AQUI PODE LER DE UM XML, DE UM JSON OU ATÉ DE UM WS...
-        categories.add(new Category("Comer", R.drawable.x, ObterAcoesComida()));
-        categories.add(new Category("Dor", R.drawable.bandera, ObterAcoesCorpo()));
-        categories.add(new Category("Coceira", R.drawable.banos_2, ObterAcoesCorpo()));
-        categories.add(new Category("Estudo", R.drawable.banar, ObterAcoesCorpo()));
-        categories.add(new Category("Líquido", R.drawable.barco_1, ObterAcoesComida()));
+        categories.add(
+                new Category("Acao", R.drawable.x,
+                        ObterAcoes("acao",
+                                new String[]{
+                                        "apagar_a_luz_1",
+                                        "comer_um_sanduiche_1",
+                                        "deitar_se",
+                                        "entrar_2",
+                                        "examinar_1",
+                                        "levantar_se_4",
+                                        "ligar_a_luz",
+                                        "nao_1",
+                                        "sair_1",
+                                        "segurar",
+                                        "tomar_banho"
+                                })));
+        categories.add(
+                new Category("Alimento", R.drawable.x,
+                        ObterAcoes("alimento",
+                                new String[]{
+                                        "abdominais",
+                                        "agua",
+                                        "braco",
+                                        "cabeca_de_perfil",
+                                        "calcanhar",
+                                        "comida",
+                                        "costas_1",
+                                        "costela_3",
+                                        "cotovelo",
+                                        "coxa",
+                                        "doce",
+                                        "fruta",
+                                        "frutos_secos_2",
+                                        "joelho",
+                                        "mao",
+                                        "nadegas",
+                                        "nariz",
+                                        "olhos",
+                                        "orelha",
+                                        "perna",
+                                        "pes",
+                                        "pescoco_1",
+                                        "rosto",
+                                        "salgado",
+                                        "suco"
+                                })));
+        categories.add(
+                new Category("Local", R.drawable.x,
+                        ObterAcoes("local",
+                                new String[]{
+                                        "banheiro_feminino_2",
+                                        "banheiro_masculino_2",
+                                        "casa",
+                                        "hospital",
+                                        "quarto_6",
+                                        "recepcionista_1",
+                                        "refeitorio_1",
+                                        "sala"
+                                })));
+        categories.add(
+                new Category("Pessoa", R.drawable.x,
+                        ObterAcoes("pessoa",
+                                new String[]{
+                                        "elas",
+                                        "eles",
+                                        "eu",
+                                        "nos_2",
+                                        "voce_2"
+                                })));
+        categories.add(
+                new Category("Sentimento", R.drawable.x,
+                        ObterAcoes("sentimento",
+                                new String[]{
+                                        "alergia",
+                                        "calor",
+                                        "cocar",
+                                        "corte_3",
+                                        "doente",
+                                        "dor_4",
+                                        "dor_de_cabeca_1",
+                                        "eczema",
+                                        "enjoar",
+                                        "esgotado",
+                                        "fome",
+                                        "frio",
+                                        "resfriado"
+                                })));
+
     }
 
-    private ArrayList<Action> ObterAcoesComida() {
+    private ArrayList<Action> ObterAcoes(String category, String[] str_actions) {
         ArrayList<Action> acoes = new ArrayList<Action>();
-        acoes.add(new Action(R.drawable.aperitivo, "Queijo"));
-        acoes.add(new Action(R.drawable.aperitivo, "Queijo2"));
-        acoes.add(new Action(R.drawable.aperitivo, "Queijo3"));
-        acoes.add(new Action(R.drawable.aperitivo, "Teste"));
-        acoes.add(new Action(R.drawable.aperitivo, "Teste2"));
-        acoes.add(new Action(R.drawable.aperitivo, "Teste3"));
-        acoes.add(new Action(R.drawable.aperitivo, "Teste"));
-        acoes.add(new Action(R.drawable.aperitivo_1, "Teste2"));
-        acoes.add(new Action(R.drawable.aperitivo_1, "Teste3"));
-        acoes.add(new Action(R.drawable.aperitivo_1, "Teste"));
-        acoes.add(new Action(R.drawable.aperitivo_1, "Teste2"));
-        acoes.add(new Action(R.drawable.aperitivo_1, "Teste3"));
-        acoes.add(new Action(R.drawable.aperitivo_1, "Teste"));
-        acoes.add(new Action(R.drawable.aperitivo_1, "Teste2"));
-        acoes.add(new Action(R.drawable.aperitivo_1, "Teste3"));
+        for(int i = 0; i < str_actions.length; i++) {
+            acoes.add(createAction(category, str_actions[i]));
+        }
         return acoes;
     }
 
-    private ArrayList<Action> ObterAcoesCorpo() {
-        ArrayList<Action> acoes = new ArrayList<Action>();
-        acoes.add(new Action(R.drawable.aperitivo_1, "Teste2"));
-        acoes.add(new Action(R.drawable.aperitivo_1, "Teste3"));
-        acoes.add(new Action(R.drawable.aperitivo_1, "Teste"));
-        acoes.add(new Action(R.drawable.aperitivo_1, "Teste2"));
-        acoes.add(new Action(R.drawable.aperitivo_1, "Teste3"));
-        acoes.add(new Action(R.drawable.aperitivo_1, "Teste"));
-        acoes.add(new Action(R.drawable.aperitivo_1, "Teste2"));
-        acoes.add(new Action(R.drawable.aperitivo_1, "Teste3"));
-        acoes.add(new Action(R.drawable.aperitivo, "Queijo"));
-        acoes.add(new Action(R.drawable.aperitivo, "Queijo2"));
-        acoes.add(new Action(R.drawable.aperitivo, "Queijo3"));
-        acoes.add(new Action(R.drawable.aperitivo, "Teste"));
-        acoes.add(new Action(R.drawable.aperitivo, "Teste2"));
-        acoes.add(new Action(R.drawable.aperitivo, "Teste3"));
-        acoes.add(new Action(R.drawable.aperitivo, "Teste"));
-        acoes.add(new Action(R.drawable.aperitivo, "Queijo"));
-        acoes.add(new Action(R.drawable.aperitivo, "Queijo2"));
-        acoes.add(new Action(R.drawable.aperitivo, "Queijo3"));
-        acoes.add(new Action(R.drawable.aperitivo, "Teste"));
-        acoes.add(new Action(R.drawable.aperitivo, "Teste2"));
-        acoes.add(new Action(R.drawable.aperitivo, "Teste3"));
-        acoes.add(new Action(R.drawable.aperitivo, "Teste"));
-        acoes.add(new Action(R.drawable.aperitivo_1, "Teste2"));
-        acoes.add(new Action(R.drawable.aperitivo_1, "Teste3"));
-        acoes.add(new Action(R.drawable.aperitivo_1, "Teste"));
-        acoes.add(new Action(R.drawable.aperitivo_1, "Teste2"));
-        acoes.add(new Action(R.drawable.aperitivo_1, "Teste3"));
-        acoes.add(new Action(R.drawable.aperitivo_1, "Teste"));
-        acoes.add(new Action(R.drawable.aperitivo_1, "Teste2"));
-        return acoes;
-    }
-
-    public static Data getInstance() {
-        return Data.INSTANCE;
+    public Action createAction(String category, String action){
+        return new Action(getDrawableFromString(category + "_" + action), action.replace("_1", "").replace("_2", "").replace("_3", "").replace("_4", "").replace("_5", "").replace("_6", "").replace("_", " "));
     }
 
     public static int getDPI(int n, final AacActivity activityContext){
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, n, activityContext.getResources().getDisplayMetrics());
     }
+
+    private int getDrawableFromString(String s){
+        return this.activityContext.getResources().getIdentifier(s, "drawable", activityContext.getPackageName());
+    }
+
 }

@@ -2,10 +2,12 @@ package dta.aac;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ScrollingLeftRightActivity extends AacActivity{
 
@@ -23,42 +25,60 @@ public class ScrollingLeftRightActivity extends AacActivity{
     protected void renderCategories() {
         LinearLayout categories = (LinearLayout) categoriesView;
         categories.removeAllViews();
-        for (Category c:Data.getInstance().getCategories()){
+        for (Category c:data.getCategories()){
             categories.addView(c.renderImageButton(this));
         }
     }
 
     @Override
-    protected void renderActions(Category c, ArrayList<Action> actions) {
-        RelativeLayout data = (RelativeLayout) actionsView;
+    protected void renderActions(Category c, ArrayList<Action> actions, int numberOfButtonsPerColumn) {
+
+        RelativeLayout data = (RelativeLayout) findViewById(R.id.tblAcoes);
         data.removeAllViews();
-        int i = 0;
-        LinearLayout ll = null;
-        for (Action a : actions) {
-            ll = useOrReuseLinearLayout(data, ll, i);
-            ll.addView(a.renderImageButton(this, c.getImageHash()));
-            i++;
+        int howManyColumnsAreNeeded = (int)Math.ceil(actions.size()/numberOfButtonsPerColumn) + 1;
+        LinearLayout[] layouts = new LinearLayout[howManyColumnsAreNeeded];
+        for(int i = 0; i < howManyColumnsAreNeeded; i++){
+            layouts[i] = createColumn();
+            appendToRelativeLayout(data, layouts[i]);
         }
-        data.addView(ll);
+
+        //populate layouts
+        int action_index = 0, layout_index = 0;
+        for (Action a : actions) {
+            try {
+                //add the button to the correct layout
+                layouts[layout_index].addView(a.renderImageButton(this));
+                action_index++;
+
+                //reset data if needed
+                if (action_index % numberOfButtonsPerColumn == 0) {
+                    layout_index++;
+                }
+            }
+            catch (Exception e){
+                System.out.println("\nProblem detected on action " + a.getName() + ".\n" +
+                                   "Category: " + c.getName() + "\n" +
+                                   "Index: " + String.valueOf(action_index) + "\n" +
+                                   "Layout: " + String.valueOf(layout_index) + "\n");
+                throw e;
+            }
+        }
     }
 
-    private LinearLayout useOrReuseLinearLayout(RelativeLayout data, LinearLayout ll, int i){
-        int numberOfButtonsPerColumn = 2;//may it be received as a parameter someday or we will read it from somewhere else?
-        LinearLayout myll = ll;
-        if (i % numberOfButtonsPerColumn == 0) {
+    protected LinearLayout createColumn(){
+        LinearLayout linearLayout = new LinearLayout(this);
+        linearLayout.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
+        linearLayout.setId(View.generateViewId());
+        return linearLayout;
+    }
 
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            if (ll != null) {
-                data.addView(ll);
-                params.addRule(RelativeLayout.RIGHT_OF, ll.getId());
-                params.addRule(RelativeLayout.END_OF, ll.getId());
-            }
-
-            myll = new LinearLayout(this);
-            myll.setOrientation(LinearLayout.VERTICAL);
-            myll.setLayoutParams(params);
+    protected void appendToRelativeLayout(RelativeLayout data, LinearLayout layout) {
+        if (data.getChildCount() > 0) {
+            int lastCreatedLinearLayoutId = data.getChildAt(data.getChildCount() - 1).getId();
+            ((RelativeLayout.LayoutParams) layout.getLayoutParams()).addRule(RelativeLayout.RIGHT_OF, lastCreatedLinearLayoutId);
         }
-        return myll;
+        data.addView(layout);
     }
 
 }

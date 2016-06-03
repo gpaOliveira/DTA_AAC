@@ -14,34 +14,33 @@ public class ScrollingUpDownActivity extends AacActivity {
 
     @Override
     protected String getLayoutTitleText(){
-        return "Swipe Left/Right on categories and Up/Down on actions";
+        return "Left/Right and Up/Down";
     }
 
     @Override
     protected void renderCategories() {
         TableRow internaltblRow = (TableRow) categoriesView;
         internaltblRow.removeAllViews();
-        for (Category c:Data.getInstance().getCategories()){
+        for (Category c:data.getCategories()){
             internaltblRow.addView(c.renderButton(this));
         }
     }
 
     @Override
-    protected void renderActions(Category c, ArrayList<Action> actions) {
+    protected void renderActions(Category c, ArrayList<Action> actions, int numberOfButtonsPerColumn) {
         TableLayout internal_tblActions  = (TableLayout) actionsView;
         internal_tblActions.removeAllViews();
         int i = 0;
         TableRow tr = null;
         for (Action a : actions) {
-            tr = useOrReuseTblRow(internal_tblActions, tr, i);
+            tr = useOrReuseTblRow(internal_tblActions, tr, i, numberOfButtonsPerColumn);
             tr.addView(a.render(this));
             i++;
         }
         internal_tblActions.addView(tr);
     }
 
-    private TableRow useOrReuseTblRow(TableLayout tblActions, TableRow tr, int i){
-        int numberOfButtonsPerColumn = 3;//may it be received as a parameter someday or we will read it from somewhere else?
+    private TableRow useOrReuseTblRow(TableLayout tblActions, TableRow tr, int i, int numberOfButtonsPerColumn){
         if (i % numberOfButtonsPerColumn == 0) {
             if (i != 0) {
                 tblActions.addView(tr);
