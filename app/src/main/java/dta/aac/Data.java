@@ -51,7 +51,7 @@ public class Data {
                                         "costas_1",
                                         "costela_3",
                                         "cotovelo",
-                                        "coxa",
+                                       /* "coxa",
                                         "doce",
                                         "fruta",
                                         "frutos_secos_2",
@@ -62,7 +62,7 @@ public class Data {
                                         "olhos",
                                         "orelha",
                                         "perna",
-                                        "pes",
+                                        "pes",*/
                                         "pescoco_1",
                                         "rosto",
                                         "salgado",

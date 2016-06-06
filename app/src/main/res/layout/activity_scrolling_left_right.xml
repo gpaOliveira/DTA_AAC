@@ -45,7 +45,7 @@
             android:contentDescription="Escutar"
             android:text="Compartilhar"
             android:onClick="onListenClick"
-            android:src="@android:drawable/ic_btn_speak_now"
+            android:src="@android:drawable/ic_lock_silent_mode_off"
             android:textColor="#000000" />
 
         <ImageButton
