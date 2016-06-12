@@ -20,6 +20,10 @@ public class Action {
         return name;
     }
 
+    public int getImage(){
+        return imageHash;
+    }
+
     public RelativeLayout render(final AacActivity activityContext) throws NullPointerException{
         RelativeLayout rl = (RelativeLayout) LayoutInflater.from(activityContext).inflate(R.layout.action_vertical_row, null);
         rl.setFocusable(false);
