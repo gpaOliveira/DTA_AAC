@@ -1,5 +1,6 @@
 package dta.aac;
 
+import android.support.v17.leanback.widget.HorizontalGridView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -35,13 +36,11 @@ public class GridViewLeftRightActivity extends AacActivity {
 
     @Override
     protected void renderActions(Category c, ArrayList<Action> actions, int numberOfButtonsPerColumn) {
-        RecyclerView horizontalGrid = (RecyclerView)findViewById(R.id.layout);
+        HorizontalGridView horizontalGrid = (HorizontalGridView)findViewById(R.id.layout);
         horizontalGrid.removeAllViews();
-        int howManyColumnsAreNeeded = (int)Math.ceil(actions.size()/numberOfButtonsPerColumn) + 1;
+        //int howManyColumnsAreNeeded = (int)Math.ceil(actions.size()/numberOfButtonsPerColumn) + 1;
         horizontalGrid.setHasFixedSize(true);
-        GridLayoutManager manager = new GridLayoutManager(this, howManyColumnsAreNeeded);
-        horizontalGrid.setLayoutManager(manager);
-        horizontalGrid.setAdapter(new ActionAdapter(this, actions, howManyColumnsAreNeeded));
+        horizontalGrid.setAdapter(new ActionAdapter(this, actions, numberOfButtonsPerColumn));
     }
 
 }
