@@ -44,7 +44,6 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ActionHold
 
     @Override
     public int getItemCount() {
-        //return actions.size();
         return (int)Math.ceil(actions.size()/rowsPerColumn) + 1;
     }
 

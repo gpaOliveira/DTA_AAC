@@ -35,12 +35,16 @@ public class GridViewLeftRightActivity extends AacActivity {
     }
 
     @Override
-    protected void renderActions(Category c, ArrayList<Action> actions, int numberOfButtonsPerColumn) {
+    protected void setAdapter(){
         HorizontalGridView horizontalGrid = (HorizontalGridView)findViewById(R.id.layout);
-        horizontalGrid.removeAllViews();
-        //int howManyColumnsAreNeeded = (int)Math.ceil(actions.size()/numberOfButtonsPerColumn) + 1;
-        horizontalGrid.setHasFixedSize(true);
-        horizontalGrid.setAdapter(new ActionAdapter(this, actions, numberOfButtonsPerColumn));
+        horizontalGrid.setAdapter(adapter);
+    }
+
+    @Override
+    protected void renderActions(Category c, ArrayList<Action> actions, int numberOfButtonsPerColumn) {
+        currentActions.clear();
+        currentActions.addAll(actions);
+        adapter.notifyDataSetChanged();
     }
 
 }
