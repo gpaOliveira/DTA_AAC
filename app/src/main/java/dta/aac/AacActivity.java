@@ -43,7 +43,7 @@ public abstract class AacActivity  extends AppCompatActivity implements
         //populate categories and load the actions of the first one
         this.renderCategories();
         Category c = data.getCategories().get(0);
-        renderActions(c, c.getActions(), NUMBER_OF_BUTTONS_PER_COLUMN);
+        //renderActions(c, c.getActions(), NUMBER_OF_BUTTONS_PER_COLUMN);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

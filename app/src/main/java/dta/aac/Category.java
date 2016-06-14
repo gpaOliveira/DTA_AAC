@@ -1,6 +1,8 @@
 package dta.aac;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -69,6 +71,23 @@ public class Category {
                 activityContext.onCategoryClick(c, v);
             }
         });
+        return button;
+    }
+
+    public ImageButton renderImageButton(Context c, DisplayMetrics displayMetrics) {
+        ImageButton button = new ImageButton(c);
+        //button.setLayoutParams(new RelativeLayout.LayoutParams(Data.getDPI(100, displayMetrics), Data.getDPI(100, displayMetrics)));
+        button.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        button.setAdjustViewBounds(true);
+        button.setImageResource(imageHash);
+        // button.setTag(this);
+        /*button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Category c = (Category) v.getTag();
+                activityContext.onCategoryClick(c, v);
+            }
+        });*/
         return button;
     }
 

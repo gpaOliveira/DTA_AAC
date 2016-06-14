@@ -1,6 +1,8 @@
 package dta.aac;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
 
 import java.util.ArrayList;
@@ -10,10 +12,10 @@ import java.util.ArrayList;
  */
 public class Data {
     ArrayList<Category> categories = new ArrayList<Category>();
-    AacActivity activityContext = null;
+    Context context;
 
-    public Data(final AacActivity activityContext){
-        this.activityContext = activityContext;
+    public Data(Context ctx){
+        this.context = ctx;
         InicializaCategorias();
     }
 
@@ -51,7 +53,7 @@ public class Data {
                                         "costas_1",
                                         "costela_3",
                                         "cotovelo",
-                                       /* "coxa",
+                                        "coxa",
                                         "doce",
                                         "fruta",
                                         "frutos_secos_2",
@@ -62,7 +64,7 @@ public class Data {
                                         "olhos",
                                         "orelha",
                                         "perna",
-                                        "pes",*/
+                                        "pes",
                                         "pescoco_1",
                                         "rosto",
                                         "salgado",
@@ -102,12 +104,12 @@ public class Data {
                                         "doente",
                                         "dor_4",
                                         "dor_de_cabeca_1",
-                                        "eczema",
-                                        "enjoar",
+                                        "eczema"//,
+                                        /*"enjoar",
                                         "esgotado",
                                         "fome",
                                         "frio",
-                                        "resfriado"
+                                        "resfriado"*/
                                 })));
 
     }
@@ -124,12 +126,16 @@ public class Data {
         return new Action(getDrawableFromString(category + "_" + action), action.replace("_1", "").replace("_2", "").replace("_3", "").replace("_4", "").replace("_5", "").replace("_6", "").replace("_", " "));
     }
 
-    public static int getDPI(int n, final AacActivity activityContext){
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, n, activityContext.getResources().getDisplayMetrics());
+    public static int getDPI(int n, Context context){
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, n, context.getResources().getDisplayMetrics());
+    }
+
+    public static int getDPI(int n, DisplayMetrics displayMetrics){
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, n, displayMetrics);
     }
 
     private int getDrawableFromString(String s){
-        return this.activityContext.getResources().getIdentifier(s, "drawable", activityContext.getPackageName());
+        return this.context.getResources().getIdentifier(s, "drawable", context.getPackageName());
     }
 
 }
