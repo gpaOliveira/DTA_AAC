@@ -57,9 +57,9 @@ public class ScrollingLeftRightActivity extends AacActivity{
             }
             catch (Exception e){
                 System.out.println("\nProblem detected on action " + a.getName() + ".\n" +
-                                   "Category: " + c.getName() + "\n" +
-                                   "Index: " + String.valueOf(action_index) + "\n" +
-                                   "Layout: " + String.valueOf(layout_index) + "\n");
+                        "Category: " + c.getName() + "\n" +
+                        "Index: " + String.valueOf(action_index) + "\n" +
+                        "Layout: " + String.valueOf(layout_index) + "\n");
                 throw e;
             }
         }

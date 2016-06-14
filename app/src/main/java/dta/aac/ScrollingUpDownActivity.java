@@ -21,6 +21,7 @@ public class ScrollingUpDownActivity extends AacActivity {
     protected void renderCategories() {
         TableRow internaltblRow = (TableRow) categoriesView;
         internaltblRow.removeAllViews();
+        System.gc();
         for (Category c:data.getCategories()){
             internaltblRow.addView(c.renderButton(this));
         }

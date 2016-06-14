@@ -3,7 +3,6 @@ package dta.aac;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
-import android.support.v17.leanback.widget.HorizontalGridView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
@@ -24,8 +23,6 @@ public abstract class AacActivity  extends AppCompatActivity implements
     int MY_DATA_CHECK_CODE = 0x1204;
     int NUMBER_OF_BUTTONS_PER_COLUMN = 3;
     Data data = null;
-    ArrayList<Action> currentActions;
-    ActionAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +34,6 @@ public abstract class AacActivity  extends AppCompatActivity implements
         categoriesView = findViewById(R.id.tblCategorias);
         actionsView = findViewById(R.id.tblAcoes);
         data = new Data(this);
-        currentActions = new ArrayList<Action>();
-        adapter = new ActionAdapter(this, currentActions, NUMBER_OF_BUTTONS_PER_COLUMN);
 
         //tts control
         Intent checkIntent = new Intent();
@@ -47,7 +42,6 @@ public abstract class AacActivity  extends AppCompatActivity implements
 
         //populate categories and load the actions of the first one
         this.renderCategories();
-        this.setAdapter();
         Category c = data.getCategories().get(0);
         //renderActions(c, c.getActions(), NUMBER_OF_BUTTONS_PER_COLUMN);
     }
@@ -107,7 +101,6 @@ public abstract class AacActivity  extends AppCompatActivity implements
     }
 
     protected abstract int getLayoutResourceId();
-    protected abstract void setAdapter();
     protected abstract String getLayoutTitleText();
     protected abstract void renderCategories();
     protected abstract void renderActions(Category c, ArrayList<Action> actions, int numberOfButtonsPerColumn);
