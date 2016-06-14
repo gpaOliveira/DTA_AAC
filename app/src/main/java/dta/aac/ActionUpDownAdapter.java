@@ -1,22 +1,27 @@
 package dta.aac;
 
-import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 
-public class OptionsAdapter extends BaseAdapter {
+public class ActionUpDownAdapter extends BaseAdapter {
     ArrayList<Action> _actions;
     AacActivity _context;
+    ScrollingWay _scroll;
+
+    public enum ScrollingWay{
+        HORIZONTAL,
+        VERTICAL
+    }
+
     // Constructor
-    public OptionsAdapter(AacActivity ctx, ArrayList<Action> actions) {
+    public ActionUpDownAdapter(AacActivity ctx, ArrayList<Action> actions, ActionUpDownAdapter.ScrollingWay scroll) {
         _actions = actions;
         _context =ctx;
+        _scroll = scroll;
     }
 
     public int getCount() {
@@ -36,7 +41,12 @@ public class OptionsAdapter extends BaseAdapter {
         RelativeLayout rl =null;
 
         if (convertView == null) {
-            rl = _actions.get(position).render(_context);
+            if (_scroll.equals(ScrollingWay.HORIZONTAL)) {
+                rl = _actions.get(position).renderHorizontal(_context);
+            }
+            if (_scroll.equals(ScrollingWay.VERTICAL)) {
+                rl = _actions.get(position).renderVertical(_context);
+            }
         }
         else
         {

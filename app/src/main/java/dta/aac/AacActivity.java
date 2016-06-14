@@ -18,7 +18,6 @@ public abstract class AacActivity  extends AppCompatActivity implements
     ImageButton btnShare = null;
     TextView tvAction = null;
     View categoriesView = null;
-    View actionsView = null;
     TextToSpeech tts;
     int MY_DATA_CHECK_CODE = 0x1204;
     int NUMBER_OF_BUTTONS_PER_COLUMN = 3;
@@ -32,7 +31,6 @@ public abstract class AacActivity  extends AppCompatActivity implements
         btnShare = (ImageButton) findViewById(R.id.btn_share);
         tvAction = (TextView) findViewById(R.id.txtBuffer);
         categoriesView = findViewById(R.id.tblCategorias);
-        actionsView = findViewById(R.id.tblAcoes);
         data = new Data(this);
 
         //tts control
@@ -42,8 +40,7 @@ public abstract class AacActivity  extends AppCompatActivity implements
 
         //populate categories and load the actions of the first one
         this.renderCategories();
-        Category c = data.getCategories().get(0);
-        //renderActions(c, c.getActions(), NUMBER_OF_BUTTONS_PER_COLUMN);
+        this.localOnCreate(NUMBER_OF_BUTTONS_PER_COLUMN);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -100,6 +97,7 @@ public abstract class AacActivity  extends AppCompatActivity implements
 
     }
 
+    protected abstract void localOnCreate(int i);
     protected abstract int getLayoutResourceId();
     protected abstract String getLayoutTitleText();
     protected abstract void renderCategories();

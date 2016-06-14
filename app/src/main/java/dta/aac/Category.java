@@ -57,7 +57,7 @@ public class Category {
         return bt;
     }
 
-    public ImageButton renderImageButton(final AacActivity activityContext) {
+  public ImageButton renderImageButton(final AacActivity activityContext) {
         ImageButton button = new ImageButton(activityContext);
         button.setLayoutParams(new RelativeLayout.LayoutParams(Data.getDPI(100, activityContext), Data.getDPI(100, activityContext)));
         button.setScaleType(ImageView.ScaleType.FIT_CENTER);
@@ -80,7 +80,7 @@ public class Category {
         button.setScaleType(ImageView.ScaleType.FIT_CENTER);
         button.setAdjustViewBounds(true);
         button.setImageResource(imageHash);
-        // button.setTag(this);
+       // button.setTag(this);
         /*button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

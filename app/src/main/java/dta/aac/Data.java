@@ -44,19 +44,26 @@ public class Data {
                 new Category("Alimento", R.drawable.x,
                         ObterAcoes("alimento",
                                 new String[]{
-                                        "abdominais",
                                         "agua",
+                                        "comida",
+                                        "doce",
+                                        "fruta",
+                                        "frutos_secos_2",
+                                        "salgado",
+                                        "suco"
+                                })));
+        categories.add(
+                new Category("Corpo", R.drawable.x,
+                        ObterAcoes("corpo",
+                                new String[]{
+                                        "abdominais",
                                         "braco",
                                         "cabeca_de_perfil",
                                         "calcanhar",
-                                        "comida",
                                         "costas_1",
                                         "costela_3",
                                         "cotovelo",
                                         "coxa",
-                                        "doce",
-                                        "fruta",
-                                        "frutos_secos_2",
                                         "joelho",
                                         "mao",
                                         "nadegas",
@@ -66,9 +73,7 @@ public class Data {
                                         "perna",
                                         "pes",
                                         "pescoco_1",
-                                        "rosto",
-                                        "salgado",
-                                        "suco"
+                                        "rosto"
                                 })));
         categories.add(
                 new Category("Local", R.drawable.x,
@@ -104,12 +109,12 @@ public class Data {
                                         "doente",
                                         "dor_4",
                                         "dor_de_cabeca_1",
-                                        "eczema"//,
-                                        /*"enjoar",
+                                        "eczema",
+                                        "enjoar",
                                         "esgotado",
                                         "fome",
                                         "frio",
-                                        "resfriado"*/
+                                        "resfriado"
                                 })));
 
     }

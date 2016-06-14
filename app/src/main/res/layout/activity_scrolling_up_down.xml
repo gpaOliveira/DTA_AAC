@@ -76,24 +76,15 @@
             android:layout_height="wrap_content"></TableRow>
     </HorizontalScrollView>
 
-    <ScrollView
-        android:id="@+id/layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="5dip"
-        android:fillViewport="true"
-        android:scrollbarStyle="outsideInset"
-        android:scrollbars="horizontal|vertical">
-
-
-        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:id="@+id/tblAcoes"
-            android:layout_height="match_parent"
-            android:background="#ffffff"
-            android:shrinkColumns="*"
-            android:stretchColumns="*">
-
-        </TableLayout>
-    </ScrollView>
+    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/gridview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:columnWidth="100dp"
+        android:numColumns="3"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
+        android:stretchMode="columnWidth"
+        android:gravity="center"
+        />
 </LinearLayout>

@@ -1,11 +1,13 @@
 package dta.aac;
 
-import android.widget.TableLayout;
+import android.widget.GridView;
 import android.widget.TableRow;
 
 import java.util.ArrayList;
 
 public class ScrollingUpDownActivity extends AacActivity {
+
+    GridView actionsView = null;
 
     @Override
     protected int getLayoutResourceId(){
@@ -15,6 +17,13 @@ public class ScrollingUpDownActivity extends AacActivity {
     @Override
     protected String getLayoutTitleText(){
         return "Left/Right and Up/Down";
+    }
+
+    @Override
+    protected void localOnCreate(int numberOfButtonsPerColumn){
+        actionsView = (GridView)findViewById(R.id.gridview);
+        Category c = data.getCategories().get(0);
+        actionsView.setAdapter(new ActionUpDownAdapter(this,c.getActions(), ActionUpDownAdapter.ScrollingWay.VERTICAL));
     }
 
     @Override
@@ -29,26 +38,9 @@ public class ScrollingUpDownActivity extends AacActivity {
 
     @Override
     protected void renderActions(Category c, ArrayList<Action> actions, int numberOfButtonsPerColumn) {
-        TableLayout internal_tblActions  = (TableLayout) actionsView;
-        internal_tblActions.removeAllViews();
-        int i = 0;
-        TableRow tr = null;
-        for (Action a : actions) {
-            tr = useOrReuseTblRow(internal_tblActions, tr, i, numberOfButtonsPerColumn);
-            tr.addView(a.render(this));
-            i++;
-        }
-        internal_tblActions.addView(tr);
-    }
-
-    private TableRow useOrReuseTblRow(TableLayout tblActions, TableRow tr, int i, int numberOfButtonsPerColumn){
-        if (i % numberOfButtonsPerColumn == 0) {
-            if (i != 0) {
-                tblActions.addView(tr);
-            }
-            tr = new TableRow(this);
-            tr.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-        }
-        return tr;
+        ActionUpDownAdapter op = new ActionUpDownAdapter(this, actions, ActionUpDownAdapter.ScrollingWay.VERTICAL);
+        op.notifyDataSetChanged();
+        System.gc();
+        actionsView.setAdapter(op);
     }
 }

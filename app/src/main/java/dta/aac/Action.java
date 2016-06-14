@@ -24,8 +24,12 @@ public class Action {
         return name;
     }
 
-    public RelativeLayout render(final AacActivity activityContext) throws NullPointerException{
-        RelativeLayout rl = (RelativeLayout) LayoutInflater.from(activityContext).inflate(R.layout.action_vertical_row, null);
+    public int getImage(){
+        return imageHash;
+    }
+
+    public RelativeLayout renderVertical(final AacActivity context) throws NullPointerException{
+        RelativeLayout rl = (RelativeLayout) LayoutInflater.from(context).inflate(R.layout.action_vertical_row, null);
         rl.setFocusable(false);
         ImageView image = (ImageView) rl.findViewById(R.id.img_row);
         Log.d(this.getName(),this.getName());
@@ -38,41 +42,28 @@ public class Action {
             @Override
             public void onClick(View v) {
                 Action action = (Action) v.getTag();
-                activityContext.onActionClick(action, v);
+                context.onActionClick(action, v);
             }
         });
         return rl;
     }
-    public RelativeLayout render(Context context) throws NullPointerException{
-        RelativeLayout rl = (RelativeLayout) LayoutInflater.from(context).inflate(R.layout.action_vertical_row, null);
+
+    public RelativeLayout renderHorizontal(final AacActivity context) throws NullPointerException{
+        RelativeLayout rl = (RelativeLayout) LayoutInflater.from(context).inflate(R.layout.action_horizontal, null);
         rl.setFocusable(false);
         ImageView image = (ImageView) rl.findViewById(R.id.img_row);
         Log.d(this.getName(),this.getName());
         image.setImageResource(this.imageHash);
         image.setContentDescription(this.name);
-        TextView tvRow = (TextView) rl.findViewById(R.id.txt_row);
-        tvRow.setText(this.name);
         image.setTag(this);
-
-        return rl;
-    }
-    public ImageButton renderImageButton(final AacActivity activityContext) {
-        ImageButton imButton = new ImageButton(activityContext);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(Data.getDPI(100, activityContext), Data.getDPI(100, activityContext));
-        imButton.setLayoutParams(params);
-        imButton.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        imButton.setAdjustViewBounds(true);
-        imButton.setImageResource(this.imageHash);
-        imButton.setTag(this);
-        imButton.setContentDescription(this.name);
-        imButton.setOnClickListener(new View.OnClickListener() {
+        image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Action action = (Action) v.getTag();
-                activityContext.onActionClick(action, v);
+                context.onActionClick(action, v);
             }
         });
-        return imButton;
+        return rl;
     }
 
 }
