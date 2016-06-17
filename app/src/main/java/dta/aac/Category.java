@@ -20,7 +20,8 @@ public class Category {
 
     public Category(String name, int imageHash, ArrayList<Action> actions) {
         this.name = name;
-        this.imageHash = imageHash;
+        //this.imageHash = imageHash;
+        this.imageHash = actions.get(0).getImage();
         this.actions = actions;
     }
 

@@ -25,8 +25,7 @@ public class ScrollingLeftRightActivity extends AacActivity{
     @Override
     protected void localOnCreate(int numberOfButtonsPerColumn){
         actionsView = (HorizontalGridView)findViewById(R.id.gridview);
-        Category c = data.getCategories().get(0);
-        _actions  = c.getActions();
+        _actions  = new ArrayList<Action>();
         actionsView.setAdapter(new ActionLeftRightAdapter(this, _actions , numberOfButtonsPerColumn));
     }
 

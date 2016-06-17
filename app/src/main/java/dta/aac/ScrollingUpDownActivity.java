@@ -22,8 +22,7 @@ public class ScrollingUpDownActivity extends AacActivity {
     @Override
     protected void localOnCreate(int numberOfButtonsPerColumn){
         actionsView = (GridView)findViewById(R.id.gridview);
-        Category c = data.getCategories().get(0);
-        actionsView.setAdapter(new ActionUpDownAdapter(this,c.getActions(), ActionUpDownAdapter.ScrollingWay.VERTICAL));
+        actionsView.setAdapter(new ActionUpDownAdapter(this, new ArrayList<Action>(), ActionUpDownAdapter.ScrollingWay.VERTICAL));
     }
 
     @Override
