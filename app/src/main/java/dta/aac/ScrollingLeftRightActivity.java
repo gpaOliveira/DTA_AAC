@@ -41,12 +41,9 @@ public class ScrollingLeftRightActivity extends AacActivity{
 
     @Override
     protected void renderActions(Category c, ArrayList<Action> actions, int numberOfButtonsPerColumn) {
-        _actions.clear();
         System.gc();
-        _actions.addAll(actions);
+        actionsView.setAdapter(new ActionLeftRightAdapter(this, actions , numberOfButtonsPerColumn));
         System.gc();
         actionsView.getAdapter().notifyDataSetChanged();
-        //ActionLeftRightAdapter op = new ActionLeftRightAdapter(this,actions,numberOfButtonsPerColumn);
-        //op.notifyDataSetChanged();
     }
 }
