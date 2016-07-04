@@ -3,6 +3,7 @@ package dta.aac;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +21,6 @@ public class Category {
 
     public Category(String name, int imageHash, ArrayList<Action> actions) {
         this.name = name;
-        //this.imageHash = imageHash;
         this.imageHash = actions.get(0).getImage();
         this.actions = actions;
     }
@@ -35,6 +35,10 @@ public class Category {
 
     public String getName(){
         return name;
+    }
+
+    private int getDPI(int n, Context context){
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, n, context.getResources().getDisplayMetrics());
     }
 
     public Button renderButton(final AacActivity activityContext){
@@ -60,7 +64,7 @@ public class Category {
 
   public ImageButton renderImageButton(final AacActivity activityContext) {
         ImageButton button = new ImageButton(activityContext);
-        button.setLayoutParams(new RelativeLayout.LayoutParams(Data.getDPI(100, activityContext), Data.getDPI(100, activityContext)));
+        button.setLayoutParams(new RelativeLayout.LayoutParams(getDPI(100, activityContext), getDPI(100, activityContext)));
         button.setScaleType(ImageView.ScaleType.FIT_CENTER);
         button.setAdjustViewBounds(true);
         button.setImageResource(imageHash);
@@ -77,7 +81,7 @@ public class Category {
 
     public ImageButton renderImageButton(Context c, DisplayMetrics displayMetrics) {
         ImageButton button = new ImageButton(c);
-        //button.setLayoutParams(new RelativeLayout.LayoutParams(Data.getDPI(100, displayMetrics), Data.getDPI(100, displayMetrics)));
+        //button.setLayoutParams(new RelativeLayout.LayoutParams(getDPI(100, displayMetrics), getDPI(100, displayMetrics)));
         button.setScaleType(ImageView.ScaleType.FIT_CENTER);
         button.setAdjustViewBounds(true);
         button.setImageResource(imageHash);

@@ -1,7 +1,6 @@
 package dta.aac;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 
@@ -16,17 +15,17 @@ public class Data {
 
     public Data(Context ctx){
         this.context = ctx;
-        InicializaCategorias();
+        initializeCategories();
     }
 
     public ArrayList<Category> getCategories(){
         return categories;
     }
 
-    private void InicializaCategorias() {
+    private void initializeCategories() {
         categories.add(
                 new Category("Acao", R.drawable.x,
-                        ObterAcoes("acao",
+                        createActions("acao",
                                 new String[]{
                                         "apagar_a_luz_1",
                                         "comer_um_sanduiche_1",
@@ -42,7 +41,7 @@ public class Data {
                                 })));
         categories.add(
                 new Category("Alimento", R.drawable.x,
-                        ObterAcoes("alimento",
+                        createActions("alimento",
                                 new String[]{
                                         "agua",
                                         "comida",
@@ -54,7 +53,7 @@ public class Data {
                                 })));
         categories.add(
                 new Category("Corpo", R.drawable.x,
-                        ObterAcoes("corpo",
+                        createActions("corpo",
                                 new String[]{
                                         "abdominais",
                                         "braco",
@@ -77,7 +76,7 @@ public class Data {
                                 })));
         categories.add(
                 new Category("Local", R.drawable.x,
-                        ObterAcoes("local",
+                        createActions("local",
                                 new String[]{
                                         "banheiro_feminino_2",
                                         "banheiro_masculino_2",
@@ -90,7 +89,7 @@ public class Data {
                                 })));
         categories.add(
                 new Category("Pessoa", R.drawable.x,
-                        ObterAcoes("pessoa",
+                        createActions("pessoa",
                                 new String[]{
                                         "elas",
                                         "eles",
@@ -100,7 +99,7 @@ public class Data {
                                 })));
         categories.add(
                 new Category("Sentimento", R.drawable.x,
-                        ObterAcoes("sentimento",
+                        createActions("sentimento",
                                 new String[]{
                                         "alergia",
                                         "calor",
@@ -119,7 +118,7 @@ public class Data {
 
     }
 
-    private ArrayList<Action> ObterAcoes(String category, String[] str_actions) {
+    private ArrayList<Action> createActions(String category, String[] str_actions) {
         ArrayList<Action> acoes = new ArrayList<Action>();
         for(int i = 0; i < str_actions.length; i++) {
             acoes.add(createAction(category, str_actions[i]));
@@ -127,16 +126,8 @@ public class Data {
         return acoes;
     }
 
-    public Action createAction(String category, String action){
+    private Action createAction(String category, String action){
         return new Action(getDrawableFromString(category + "_" + action), action.replace("_1", "").replace("_2", "").replace("_3", "").replace("_4", "").replace("_5", "").replace("_6", "").replace("_", " "));
-    }
-
-    public static int getDPI(int n, Context context){
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, n, context.getResources().getDisplayMetrics());
-    }
-
-    public static int getDPI(int n, DisplayMetrics displayMetrics){
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, n, displayMetrics);
     }
 
     private int getDrawableFromString(String s){
